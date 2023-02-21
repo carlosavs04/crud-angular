@@ -1,0 +1,34 @@
+<div class="form-container">
+    <h1>Actualizar alumno</h1>
+    <form [formGroup]="alumnoForm" (ngSubmit)="onSubmit(alumnoForm.value)">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre">
+        <div *ngIf="alumnoForm.get('nombre')?.invalid && (alumnoForm.get('nombre')?.touched || alumnoForm.get('nombre')?.dirty)">
+            <span class="error-message" *ngIf="alumnoForm.get('nombre')?.errors?.['required']">El campo nombre es obligatorio.</span>
+        </div>
+        <label for="ap_paterno">Apellido paterno</label>
+        <input type="text" formControlName="ap_paterno" placeholder="Ingresa el apellido paterno del alumno">
+        <div *ngIf="alumnoForm.get('ap_paterno')?.invalid && (alumnoForm.get('ap_paterno')?.touched || alumnoForm.get('ap_paterno')?.dirty)">
+            <span class="error-message" *ngIf="alumnoForm.get('ap_paterno')?.errors?.['required']">El campo apellido paterno es obligatorio.</span>
+        </div>
+        <label for="ap_materno">Apellido materno</label>
+        <input type="text" formControlName="ap_materno" placeholder="Ingresa el apellido materno del alumno">
+        <div *ngIf="alumnoForm.get('ap_materno')?.invalid && (alumnoForm.get('ap_materno')?.touched || alumnoForm.get('ap_materno')?.dirty)">
+            <span class="error-message" *ngIf="alumnoForm.get('ap_materno')?.errors?.['required']">El campo apellido materno es obligatorio.</span>
+        </div>
+        <label for="edad">Edad</label>
+        <input type="number" formControlName="edad" placeholder="Ingresa la edad del alumno">
+        <div *ngIf="alumnoForm.get('edad')?.invalid && (alumnoForm.get('edad')?.touched || alumnoForm.get('edad')?.dirty)">
+            <span class="error-message" *ngIf="alumnoForm.get('edad')?.errors?.['required']">El campo edad es obligatorio.</span>
+        </div>
+        <label for="carrera">Carrera</label>
+        <select formControlName="carrera_id">
+            <option value="" disabled selected>Selecciona una carrera</option>>
+            <option *ngFor="let carrera of carreras" [value]="carrera.id">{{carrera.nombre}}</option>
+        </select>
+        <div *ngIf="alumnoForm.get('carrera')?.invalid && (alumnoForm.get('carrera')?.touched || alumnoForm.get('carrera')?.dirty)">
+            <span class="error-message" *ngIf="alumnoForm.get('carrera')?.errors?.['required']">El campo carrera es obligatorio.</span>
+        </div>
+        <button type="submit" class="primary-button" [disabled]="!alumnoForm.valid">Actualizar</button>
+    </form>
+</div>

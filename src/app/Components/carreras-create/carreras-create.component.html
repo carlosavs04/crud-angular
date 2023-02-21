@@ -1,0 +1,11 @@
+<div class="form-container">
+    <h1>Añadir carrera</h1>
+    <form [formGroup]="carreraForm" (ngSubmit)="onSubmit(carreraForm.value)">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Ingresa el nombre de la carrera">
+        <div *ngIf="carreraForm.get('nombre')?.invalid && (carreraForm.get('nombre')?.touched || carreraForm.get('nombre')?.dirty)">
+            <span class="error-message" *ngIf="carreraForm.get('nombre')?.errors?.['required']">El campo nombre es obligatorio.</span>
+        </div>
+        <button type="submit" class="primary-button" [disabled]="!carreraForm.valid">Añadir</button>
+    </form>
+</div>

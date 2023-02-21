@@ -1,0 +1,21 @@
+<div class="form-container">
+    <h1>Añadir profesor</h1>
+    <form [formGroup]="profesorForm" (ngSubmit)="onSubmit(profesorForm.value)">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Ingresa el nombre del profesor">
+        <div *ngIf="profesorForm.get('nombre')?.invalid && (profesorForm.get('nombre')?.touched || profesorForm.get('nombre')?.dirty)">
+            <span class="error-message" *ngIf="profesorForm.get('nombre')?.errors?.['required']">El campo nombre es obligatorio.</span>
+        </div>
+        <label for="ap_paterno">Apellido paterno</label>
+        <input type="text" formControlName="ap_paterno" placeholder="Ingresa el apellido paterno del profesor">
+        <div *ngIf="profesorForm.get('ap_paterno')?.invalid && (profesorForm.get('ap_paterno')?.touched || profesorForm.get('ap_paterno')?.dirty)">
+            <span class="error-message" *ngIf="profesorForm.get('ap_paterno')?.errors?.['required']">El campo apellido paterno es obligatorio.</span>
+        </div>
+        <label for="ap_materno">Apellido materno</label>
+        <input type="text" formControlName="ap_materno" placeholder="Ingresa el apellido materno del profesor">
+        <div *ngIf="profesorForm.get('ap_materno')?.invalid && (profesorForm.get('ap_materno')?.touched || profesorForm.get('ap_materno')?.dirty)">
+            <span class="error-message" *ngIf="profesorForm.get('ap_materno')?.errors?.['required']">El campo apellido materno es obligatorio.</span>
+        </div>
+        <button type="submit" class="primary-button" [disabled]="!profesorForm.valid">Añadir</button>
+    </form>
+</div>

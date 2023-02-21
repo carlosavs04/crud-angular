@@ -1,0 +1,11 @@
+<div class="form-container">
+    <h1>Actualizar materia</h1>
+    <form [formGroup]="materiaForm" (ngSubmit)="onSubmit(materiaForm.value)">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Ingresa el nombre de la materia">
+        <div *ngIf="materiaForm.get('nombre')?.invalid && (materiaForm.get('nombre')?.touched || materiaForm.get('nombre')?.dirty)">
+            <span class="error-message" *ngIf="materiaForm.get('nombre')?.errors?.['required']">El campo nombre es obligatorio.</span>
+        </div>
+        <button type="submit" class="primary-button" [disabled]="!materiaForm.valid">Actualizar</button>
+    </form>
+</div>

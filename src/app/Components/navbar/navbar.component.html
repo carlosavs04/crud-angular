@@ -1,0 +1,65 @@
+<nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 mx-auto">
+            <div class="flex">
+                <div class="shrink-0 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="block h-9 w-auto fill-current text-gray-200"><path d="M337.8 5.4C327-1.8 313-1.8 302.2 5.4L166.3 96H48C21.5 96 0 117.5 0 144V464c0 26.5 21.5 48 48 48H592c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H473.7L337.8 5.4zM256 416c0-35.3 28.7-64 64-64s64 28.7 64 64v96H256V416zM96 192h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V208c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V208zM96 320h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H96c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm400 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16H512c-8.8 0-16-7.2-16-16V336zM232 176a88 88 0 1 1 176 0 88 88 0 1 1 -176 0zm88-48c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H336V144c0-8.8-7.2-16-16-16z"/></svg>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
+                    <span class="inline-flex rounded-md">
+                        <mat-form-field>
+                            <mat-label class="mat-label">Ver</mat-label>
+                            <mat-select>
+                                <mat-option *ngIf="iAdmin" routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Usuarios  
+                                </mat-option>
+                                <mat-option routerLink="/alumnos/filter" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Alumnos
+                                </mat-option>
+                                <mat-option routerLink="/profesores" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Profesores
+                                </mat-option>
+                                <mat-option routerLink="/carreras" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Carreras
+                                </mat-option>
+                                <mat-option routerLink="/materias" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Materias
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
+                    <span class="inline-flex rounded-md">
+                        <mat-form-field>
+                            <mat-label class="mat-label">Añadir</mat-label>
+                            <mat-select>
+                                <mat-option routerLink="/alumnos/create" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Alumnos
+                                </mat-option>
+                                <mat-option routerLink="/profesores/create" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Profesores
+                                </mat-option>
+                                <mat-option routerLink="/carreras/create" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Carreras
+                                </mat-option>
+                                <mat-option routerLink="/materias/create" routerLinkActive="active" ariaCurrentWhenActive="page">
+                                    Materias
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                    <div class="ml-96 flex">
+                        <button type="button" *ngIf="isLogged===false" (click)="register()" class="text-white ml-80 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0">Registrarme</button>
+                        <button type="button"  *ngIf="isLogged===false" (click)="login()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ml-3">Iniciar sesión</button>
+                        <button type="button" *ngIf="isLogged" (click)="logout()" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ml-80">Cerrar sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  
