@@ -20,6 +20,7 @@ import { ProfesoresCreateComponent } from './Components/profesores-create/profes
 import { AlumnosUpdateComponent } from './Components/alumnos-update/alumnos-update.component';
 import { FilterAlumnosComponent } from './Components/filter-alumnos/filter-alumnos.component';
 import { AdminGuard } from './Guards/admin.guard';
+import { AuthGuard } from './Guards/auth.guard';
 
 
 const routes: Routes = [
@@ -28,11 +29,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, title: 'Registro' },
   { path : 'emailverify', component: EmailVerifyComponent,title:'Verificacion de email' },
   { path:'codeverify', component:CodeVerifyComponent,title:'Verificacion SMS' },
-  { path: 'alumnos/filter', component: FilterAlumnosComponent, title: 'Lista de alumnos' },
-  { path: 'alumnos', component: AlumnosTableComponent, title: 'Lista de alumnos' },
-  { path: 'carreras', component: CarrerasTableComponent, title: 'Lista de carreras'},
-  { path: 'materias', component: MateriasTableComponent, title: 'Lista de materias' },
-  { path: 'profesores', component: ProfesoresTableComponent, title: 'Lista de profesores' },
+  { path: 'alumnos/filter', component: FilterAlumnosComponent, title: 'Lista de alumnos', canActivate: [AuthGuard] },
+  { path: 'alumnos', component: AlumnosTableComponent, title: 'Lista de alumnos', canActivate: [AuthGuard] },
+  { path: 'carreras', component: CarrerasTableComponent, title: 'Lista de carreras', canActivate: [AuthGuard]},
+  { path: 'materias', component: MateriasTableComponent, title: 'Lista de materias', canActivate: [AuthGuard] },
+  { path: 'profesores', component: ProfesoresTableComponent, title: 'Lista de profesores', canActivate: [AuthGuard]  },
   { path: 'users', component: UsersTableComponent, title: 'Lista de usuarios', canActivate: [AdminGuard] },
   { path: 'alumnos/create', component: AlumnosCreateComponent, title: 'Añadir alumno', canActivate: [AdminGuard] },
   { path: 'carreras/create', component: CarrerasCreateComponent, title: 'Añadir carrera', canActivate: [AdminGuard] },

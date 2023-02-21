@@ -35,7 +35,7 @@ export class AlumnosCreateComponent {
   onSubmit(values: Alumno) {
     if(this.alumnoForm.valid) {
       this.alumnoService.addAlumno(values).subscribe();
-      this.router.navigate(['/alumnos']);
+      this.router.navigate(['/alumnos/filter']);
     }
   }
 }
