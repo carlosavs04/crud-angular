@@ -21,7 +21,6 @@ export class AuthService {
 
    verifyRole(){
     return this.http.get(this.apiRole).subscribe()
-
    }
 
 }

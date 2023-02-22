@@ -26,8 +26,10 @@ export class LoginComponent {
     if(this.loginForm.valid) {
       this.userService.login(values).subscribe((response:any)=>{
         localStorage.setItem('token', response.token);
-        if(response.status ==200){
-          this.router.navigate(['/alumnos']);
+        if(response.status === 200){
+          if(this.userService.getUserLoggedIn()){
+            this.router.navigate(['/alumnos']);
+          }
         }
       });
     }
