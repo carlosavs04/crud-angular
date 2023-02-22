@@ -17,10 +17,26 @@ export class NavbarComponent {
   userLoggedIn: boolean = false;
 
   ngOnInit() {
+    const isLogged = localStorage.getItem('isLogged');
+    const iAdmin = localStorage.getItem('iAdmin');
+    const userLoggedIn = localStorage.getItem('userLoggedIn');
+
+    if (isLogged !== null) {
+      this.isLogged = isLogged === 'true';
+    }
+    if (iAdmin !== null) {
+      this.iAdmin = iAdmin === 'true';
+    }
+    if (userLoggedIn !== null) {
+      this.userLoggedIn = userLoggedIn === 'true';
+    }
+
     this.isAdmin();
     this.getToken();
     this.userService.getUserLoggedIn().subscribe(loggedIn => {
       this.userLoggedIn = loggedIn;
+
+      localStorage.setItem('userLoggedIn', this.userLoggedIn.toString());
     });
   }
 
@@ -29,6 +45,7 @@ export class NavbarComponent {
       map(isAdmin => {
         if(isAdmin) {
           this.iAdmin = true;
+          localStorage.setItem('iAdmin', this.iAdmin.toString());
         } else {
           this.iAdmin = false;
         }
@@ -41,6 +58,7 @@ export class NavbarComponent {
       map(token => { 
         if(token) {
           this.isLogged = true;
+          localStorage.setItem('isLogged', this.isLogged.toString());
         } else {
           this.isLogged = false;
         }
@@ -51,6 +69,9 @@ export class NavbarComponent {
   logout() {
     this.userService.logout().subscribe(() => location.reload());
     localStorage.removeItem('token');
+    localStorage.removeItem('isLogged');
+    localStorage.removeItem('iAdmin');
+    localStorage.removeItem('userLoggedIn');
     this.router.navigate(['/login']);
   }
 

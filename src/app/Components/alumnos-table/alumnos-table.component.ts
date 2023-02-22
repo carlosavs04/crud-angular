@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog'
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { UserService } from 'src/app/Services/user.service';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CarreraService } from 'src/app/Services/carrera.service';
+import { Carrera } from 'src/app/Interfaces/carrera.interface';
 
 @Component({
   selector: 'app-alumnos-table',
@@ -14,10 +17,22 @@ import { map } from 'rxjs/operators';
 })
 export class AlumnosTableComponent implements OnInit {
   alumnos?: Alumno[];
-  constructor(private alumnoService: AlumnoService, private router: Router, public dialog: MatDialog, private userService: UserService) { }
+  filterForm: FormGroup;
+  carreras?: Carrera[];
+
+  constructor(private alumnoService: AlumnoService, private router: Router, public dialog: MatDialog, private userService: UserService, private carreraService: CarreraService, private fb: FormBuilder) {
+    this.filterForm = this.fb.group({
+      carrera: ['', Validators.required],
+    });
+
+    this.carreraService.getCarreras().subscribe(carreras => {
+      this.carreras = carreras;
+    });
+   }
 
   isLogged: boolean = false;
   iAdmin: boolean = false;
+
 
   ngOnInit() {
     this.getAlumnos();
@@ -79,5 +94,12 @@ export class AlumnosTableComponent implements OnInit {
         }
       })
     ).subscribe(response => console.log(response));
+  }
+
+  onFilter(values: Alumno) {
+    if(this.filterForm.valid) {
+      this.alumnoService.filterAlumnos(Number(values.carrera)).subscribe(response => {
+        localStorage.setItem('alumnos', JSON.stringify(response)), location.reload();});
+    }
   }
 }

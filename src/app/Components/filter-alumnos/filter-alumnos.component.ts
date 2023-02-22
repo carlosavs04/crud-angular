@@ -30,7 +30,7 @@ export class FilterAlumnosComponent {
   onSubmit(values: Alumno) {
     if(this.filterForm.valid) {
       this.alumnoService.filterAlumnos(Number(values.carrera)).subscribe(response => {
-        localStorage.setItem('alumnos', JSON.stringify(response)), location.reload();});
+        localStorage.setItem('alumnos', JSON.stringify(response))});
     }
   }
 }

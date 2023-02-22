@@ -27,7 +27,7 @@ export class LoginComponent {
       this.userService.login(values).subscribe((response:any)=>{
         localStorage.setItem('token', response.token);
         if(response.status ==200){
-          this.router.navigate(['/alumnos/filter']);
+          this.router.navigate(['/alumnos']);
         }
       });
     }
