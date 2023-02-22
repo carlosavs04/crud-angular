@@ -9,21 +9,22 @@ import { map } from 'rxjs/operators';
 })
 export class AdminGuard implements CanActivate {
   constructor(private userService: UserService) {}
-  
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      return this.userService.isAdmin().pipe(
-        map(isAdmin => {
-          if(isAdmin) {
+      const roles = route.data['roles'] as Array<number>;
+      
+      return this.userService.getRol().pipe(
+        map(response => {
+          const rol = parseInt(response.rol || '', 10);
+          if(roles.includes(rol)) {
             return true;
-          } else {
-            alert('No tienes permisos de administrador para acceder a esta ruta.');
-            return false;
           }
+          alert('No tienes permisos para acceder a esta ruta.')
+          return false;
         })
       );
   }
-  
 }

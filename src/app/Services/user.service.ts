@@ -82,7 +82,7 @@ export class UserService {
     return this.http.post(route, code)
   }
 
-  getRol(): Observable<User> {
+  getRol() {
     return this.http.get<User>(this.getRolUrl)
       .pipe(
         retry(3),
@@ -90,7 +90,7 @@ export class UserService {
       );
   }
 
-  isAdmin(): Observable<User> {
+  isAdmin() {
     return this.http.get<User>(this.isAdminUrl)
       .pipe(
         retry(3),
@@ -98,12 +98,12 @@ export class UserService {
       );
   }
 
-  getToken(): Observable<User> {
+  getToken() {
     return this.http.get<User>(this.getUserUrl)
       .pipe(
         retry(3),
         catchError(this.handleError)
-      );
+      )
   }
 
   logout(): Observable<User> {
