@@ -14,10 +14,14 @@ export class NavbarComponent {
 
   isLogged: boolean = false;
   iAdmin: boolean = false;
+  userLoggedIn: boolean = false;
 
   ngOnInit() {
     this.isAdmin();
     this.getToken();
+    this.userService.getUserLoggedIn().subscribe(loggedIn => {
+      this.userLoggedIn = loggedIn;
+    });
   }
 
   isAdmin() {

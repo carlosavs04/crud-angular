@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable, throwError, Subject } from 'rxjs';
+import { catchError, retry, tap } from 'rxjs/operators';
 import { User } from '../Interfaces/user.interface';
-
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,8 @@ export class UserService {
   private getUserUrl = environment.apiUrl + '/user';
   private isAdminUrl = environment.apiUrl + '/user/admin';
   private logoutUrl = environment.apiUrl + '/logout';
+
+  private userLoggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -42,6 +43,9 @@ export class UserService {
   login(user: User): Observable<User> {
     return this.http.post<User>(this.loginUrl, user)
       .pipe(
+        tap(() => {
+          this.userLoggedIn.next(true);
+        }),
         catchError(this.handleError)
       );
   }
@@ -112,6 +116,10 @@ export class UserService {
         retry(3),
         catchError(this.handleError)
       );
+  }
+
+  getUserLoggedIn() {
+    return this.userLoggedIn.asObservable();
   }
 
   private handleError(error: HttpErrorResponse) {
