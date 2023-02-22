@@ -21,14 +21,14 @@ import { AlumnosUpdateComponent } from './Components/alumnos-update/alumnos-upda
 import { FilterAlumnosComponent } from './Components/filter-alumnos/filter-alumnos.component';
 import { AdminGuard } from './Guards/admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
-
+import { LoginGuard } from './Guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent, title: 'Iniciar sesión' },
-  { path: 'register', component: RegisterComponent, title: 'Registro' },
-  { path : 'emailverify', component: EmailVerifyComponent,title:'Verificacion de email' },
-  { path:'codeverify', component:CodeVerifyComponent,title:'Verificacion SMS' },
+  { path: 'login', component: LoginComponent, title: 'Iniciar sesión', canActivate: [LoginGuard] },
+  { path: 'register', component: RegisterComponent, title: 'Registro', canActivate: [LoginGuard] },
+  { path : 'emailverify', component: EmailVerifyComponent,title:'Verificacion de email', canActivate: [LoginGuard] },
+  { path:'codeverify', component:CodeVerifyComponent,title:'Verificacion SMS', canActivate: [LoginGuard] },
   { path: 'alumnos/filter', component: FilterAlumnosComponent, title: 'Lista de alumnos', canActivate: [AuthGuard], data: { roles: [1, 2, 3] } },
   { path: 'alumnos', component: AlumnosTableComponent, title: 'Lista de alumnos', canActivate: [AdminGuard], data: { roles: [1, 2, 3] } },
   { path: 'carreras', component: CarrerasTableComponent, title: 'Lista de carreras', canActivate: [AdminGuard], data: { roles: [1, 2, 3] }},
