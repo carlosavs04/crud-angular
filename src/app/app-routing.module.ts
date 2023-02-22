@@ -23,7 +23,7 @@ import { AuthGuard } from './Guards/auth.guard';
 import { LoginGuard } from './Guards/login.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '**', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent, title: 'Iniciar sesión', canActivate: [LoginGuard] },
   { path: 'register', component: RegisterComponent, title: 'Registro', canActivate: [LoginGuard] },
   { path: 'emailverify', component: EmailVerifyComponent,title:'Verificacion de email', canActivate: [LoginGuard] },
