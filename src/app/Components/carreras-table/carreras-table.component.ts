@@ -17,13 +17,11 @@ export class CarrerasTableComponent implements OnInit {
   carreras?: Carrera[];
   constructor(private carreraService: CarreraService, private router: Router, public dialog: MatDialog, private userService: UserService) { }
 
-  isLogged: boolean = false;
   iAdmin: boolean = false;
 
   ngOnInit() {
     this.getCarreras();
     this.isAdmin();
-    this.getToken();
   }
 
   getCarreras() {
@@ -67,18 +65,6 @@ export class CarrerasTableComponent implements OnInit {
           this.iAdmin = true;
         } else {
           this.iAdmin = false;
-        }
-      })
-    ).subscribe(response => console.log(response));
-  }
-
-  getToken() {
-    this.userService.getToken().pipe(
-      map(token => { 
-        if(token) {
-          this.isLogged = true;
-        } else {
-          this.isLogged = false;
         }
       })
     ).subscribe(response => console.log(response));

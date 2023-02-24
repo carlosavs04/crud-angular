@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../Services/user.service';
 import { AuthService } from '../Services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../Services/auth.service';
 })
 export class AuthGuard implements CanActivate {
   private tokenValid:boolean = true
-  constructor(private authService:AuthService, private router: Router, private userService: UserService) {}
+  constructor(private authService:AuthService, private userService: UserService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
         ()=>{
         this.tokenValid = true
         },
-        ()=> { this.userService.logout().subscribe(), localStorage.removeItem('token'), this.router.navigate(['/login'])
+        ()=> { this.userService.logout().subscribe(), localStorage.removeItem('token'), localStorage.removeItem('iAdmin'), localStorage.removeItem('userLoggedIn'), location.assign('/login')
         alert('Tu sesión ha expirado o tu token es inválido.');
         this.tokenValid = false
         })

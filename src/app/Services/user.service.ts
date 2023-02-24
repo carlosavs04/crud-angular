@@ -40,6 +40,11 @@ export class UserService {
     return this.signedRoute;
   }
 
+  verifyCode(code: string) {
+    const route = this.getSignedRoute();
+    return this.http.post(route, code)
+  }
+
   login(user: User): Observable<User> {
     return this.http.post<User>(this.loginUrl, user)
       .pipe(
@@ -79,11 +84,6 @@ export class UserService {
       .pipe(
         catchError(this.handleError)
       );
-  }
-
-  verifyCode(code: string) {
-    const route = this.getSignedRoute();
-    return this.http.post(route, code)
   }
 
   getRol() {

@@ -30,14 +30,11 @@ export class AlumnosTableComponent implements OnInit {
     });
    }
 
-  isLogged: boolean = false;
   iAdmin: boolean = false;
-
 
   ngOnInit() {
     this.getAlumnos();
     this.isAdmin();
-    this.getToken();
   }
 
   getAlumnos() {
@@ -79,18 +76,6 @@ export class AlumnosTableComponent implements OnInit {
           this.iAdmin = true;
         } else {
           this.iAdmin = false;
-        }
-      })
-    ).subscribe(response => console.log(response));
-  }
-
-  getToken() {
-    this.userService.getToken().pipe(
-      map(token => { 
-        if(token) {
-          this.isLogged = true;
-        } else {
-          this.isLogged = false;
         }
       })
     ).subscribe(response => console.log(response));
