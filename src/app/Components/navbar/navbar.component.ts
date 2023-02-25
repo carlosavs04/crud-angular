@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { UserService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -10,11 +10,11 @@ import type { DropdownOptions, DropdownInterface } from 'flowbite';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  iAdmin: boolean = false;
+  iAdmin: boolean = true;
   userLoggedIn: boolean = false;
   @ViewChild('verDropdown') verDropdown?: Dropdown;
   @ViewChild('añadirDropdown') añadirDropdown?: Dropdown;
@@ -96,6 +96,7 @@ export class NavbarComponent {
     const dropdownMenu: HTMLElement | null = document.getElementById('dropdownMenu');
     const targetEl: HTMLElement | null = document.getElementById('targetEl');
     const triggerEl: HTMLElement | null = document.getElementById('triggerEl');
+    const dropdownLinks = document.querySelectorAll('.dropdown-link');
 
     const options: DropdownOptions = {
       placement: 'bottom',
@@ -118,6 +119,13 @@ export class NavbarComponent {
 
     const añadirDropdown: DropdownInterface = new Dropdown(targetEl, triggerEl, options);
     añadirDropdown.hide();
+
+    dropdownLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        verDropdown.hide();
+        añadirDropdown.hide();
+      });
+    });
   }  
 }
 
