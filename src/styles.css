@@ -103,3 +103,7 @@ h3 {
     @apply text-center mx-auto
 }
 
+.dropdown-link {
+    @apply block w-full px-4 py-2 text-center text-sm leading-5 text-white hover:bg-blue-900 focus:outline-none focus:bg-gray-900 transition duration-150 ease-in-out
+}
+

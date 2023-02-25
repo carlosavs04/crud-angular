@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'carreras', component: CarrerasTableComponent, title: 'Lista de carreras', canActivate: [AuthGuard, AdminGuard], data: { roles: [1, 2, 3] }},
   { path: 'materias', component: MateriasTableComponent, title: 'Lista de materias',  canActivate: [AuthGuard, AdminGuard], data: { roles: [1, 2, 3] }},
   { path: 'profesores', component: ProfesoresTableComponent, title: 'Lista de profesores', canActivate: [AuthGuard, AdminGuard], data: { roles: [1, 2, 3] }},
-  { path: 'users', component: UsersTableComponent, title: 'Lista de usuarios',  canActivate: [AuthGuard, AdminGuard], data: { roles: [1, 2, 3] }},
+  { path: 'users', component: UsersTableComponent, title: 'Lista de usuarios',  canActivate: [AuthGuard, AdminGuard], data: { roles: [1] }},
   { path: 'alumnos/create', component: AlumnosCreateComponent, title: 'Añadir alumno', canActivate: [AuthGuard, AdminGuard], data: { roles: [1, 3] }},
   { path: 'carreras/create', component: CarrerasCreateComponent, title: 'Añadir carrera',  canActivate: [AuthGuard, AdminGuard], data: { roles: [1] } },
   { path: 'materias/create', component: MateriasCreateComponent, title: 'Añadir materia',  canActivate: [AuthGuard, AdminGuard], data: { roles: [1] }},

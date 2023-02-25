@@ -26,9 +26,12 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/flowbite/dist/flowbite.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/flowbite/dist/flowbite.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,9 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/flowbite/dist/flowbite.css",
-              "node_modules/flowbite/dist/_variables.scss",
-              "src/styles.css"
+            "src/styles.css"
             ],
             "scripts": []
           }

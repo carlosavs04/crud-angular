@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Dropdown } from 'flowbite';
+import type { DropdownOptions, DropdownInterface } from 'flowbite';
 
 @Component({
   selector: 'app-navbar',
@@ -14,8 +16,12 @@ export class NavbarComponent {
 
   iAdmin: boolean = false;
   userLoggedIn: boolean = false;
+  @ViewChild('verDropdown') verDropdown?: Dropdown;
+  @ViewChild('añadirDropdown') añadirDropdown?: Dropdown;
 
   ngOnInit() {
+    this.isAdmin();
+    this.getToken();
     const iAdmin = localStorage.getItem('iAdmin');
     const userLoggedIn = localStorage.getItem('userLoggedIn');
 
@@ -27,8 +33,6 @@ export class NavbarComponent {
       this.userLoggedIn = userLoggedIn === 'true';
     }
 
-    this.isAdmin();
-    this.getToken();
     this.userService.getUserLoggedIn().subscribe(loggedIn => {
       this.userLoggedIn = loggedIn;
       localStorage.setItem('userLoggedIn', this.userLoggedIn.toString());
@@ -40,12 +44,14 @@ export class NavbarComponent {
       map(isAdmin => {
         if(isAdmin) {
           this.iAdmin = true;
-          localStorage.setItem('iAdmin', this.iAdmin.toString());
         } else {
           this.iAdmin = false;
         }
       })
-    ).subscribe(response => console.log(response));
+    ).subscribe(response => {
+      localStorage.setItem('iAdmin', this.iAdmin.toString());
+      console.log(response);
+    });
   }
 
   getToken() {
@@ -76,5 +82,42 @@ export class NavbarComponent {
   register() {
     this.router.navigate(['/register']);
   }
+
+  showVerDropdown() {
+    this.verDropdown?.show();
+  }
+
+  showAddDropdown() {
+    this.añadirDropdown?.show();
+  }
+  
+  ngAfterViewInit() {
+    const dropdownButton: HTMLElement | null = document.getElementById('dropdownButton');
+    const dropdownMenu: HTMLElement | null = document.getElementById('dropdownMenu');
+    const targetEl: HTMLElement | null = document.getElementById('targetEl');
+    const triggerEl: HTMLElement | null = document.getElementById('triggerEl');
+
+    const options: DropdownOptions = {
+      placement: 'bottom',
+      triggerType: 'click',
+      offsetSkidding: 0,
+      offsetDistance: 10,
+      delay: 300,
+      onHide: () => {
+          console.log('dropdown has been hidden');
+      },
+      onShow: () => {
+          console.log('dropdown has been shown');
+      },
+      onToggle: () => {
+          console.log('dropdown has been toggled');
+      }
+    };
+    const verDropdown: DropdownInterface = new Dropdown(dropdownMenu, dropdownButton, options);
+    verDropdown.hide();
+
+    const añadirDropdown: DropdownInterface = new Dropdown(targetEl, triggerEl, options);
+    añadirDropdown.hide();
+  }  
 }
 
