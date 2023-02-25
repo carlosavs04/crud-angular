@@ -9,7 +9,7 @@ label {
 }
 
 input {
-    @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+    @apply bg-gray-700 border-gray-600 text-white placeholder-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 !important
 }
 
 .primary-button {
