@@ -37,6 +37,10 @@ export class MateriasTableComponent implements OnInit {
     this.materiaService.deleteMateria(id).subscribe();
   }
 
+  addProfesor(id:number){
+    this.router.navigate(['/materia/add/profesor', id]);
+  }
+
   openDeleteModal(id: number) {
     const dialogRef = this.dialog.open(DeleteMateriaModalComponent, {
       height: '283px',

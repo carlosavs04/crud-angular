@@ -30,6 +30,10 @@ export class ProfesoresTableComponent implements OnInit {
     );
   }
 
+  addMateria(id:number){
+    this.router.navigate(['/profesor/add/materia',id])
+  }
+
   updateProfesor(id: number) {
     this.router.navigate(['/profesores/update', id]);
   }

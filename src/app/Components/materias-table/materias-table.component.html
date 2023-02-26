@@ -4,6 +4,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col" *ngIf="iAdmin">Profesores</th>
+            <th scope="col" *ngIf="iAdmin">Accion</th>
             <th scope="col" *ngIf="iAdmin">Editar</th>
             <th scope="col" *ngIf="iAdmin">Eliminar</th>
         </tr>
@@ -12,6 +14,14 @@
         <tr *ngFor="let materia of materias">
             <td>{{materia.id}}</td>
             <td>{{materia.nombre}}</td>
+            <td>
+              <ul *ngFor="let profesor of materia.profesores">
+                <li class="my-1">{{profesor.nombre}} {{profesor.ap_paterno}}</li>
+              </ul>
+            </td>
+            <td *ngIf="iAdmin">
+              <button type="button" class="bg-green-500 text-white px-6 rounded-lg" (click)="addProfesor(materia.id)">Agregar Profesor</button>
+            </td>
             <td *ngIf="iAdmin">
                 <button type="button" class="edit-button" (click)="updateMateria(materia.id)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

@@ -52,6 +52,12 @@ export class ProfesorService {
       );
   }
 
+  addMateria(profesorId:number, materiaId:number){
+    return this.http.post((this.profesorUrl + '/' + profesorId + '/add/materia'),materiaId).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     if(error.status === 0) {
       console.error('Un error inesperado ha ocurrido:', error.error);

@@ -1,0 +1,12 @@
+<h1>Agregar Materia</h1>
+<div class="form-container">
+  <form [formGroup]="profesorMateriaForm">
+    <h3>Profesor: </h3>
+    <h4>{{profesor?.nombre}} {{profesor?.ap_paterno}} {{profesor?.ap_materno}}</h4>
+    <label for="materia">Materias:</label>
+    <select name="materia_id" id="materia_id" formControlName="materia_id">
+      <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}}</option>
+    </select>
+    <button class="primary-button" type="submit" (click)="onSubmit(profesorMateriaForm.value)">Agregar</button>
+  </form>
+</div>

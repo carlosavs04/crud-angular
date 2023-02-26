@@ -21,6 +21,9 @@ import { AlumnosUpdateComponent } from './Components/alumnos-update/alumnos-upda
 import { AdminGuard } from './Guards/admin.guard';
 import { AuthGuard } from './Guards/auth.guard';
 import { LoginGuard } from './Guards/login.guard';
+import { ProfesorAddMateriaComponent } from './Components/profesor-add-materia/profesor-add-materia.component';
+import { Title } from '@angular/platform-browser';
+import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/materia-add-profesor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -41,6 +44,8 @@ const routes: Routes = [
   { path: 'carreras/update/:id', component: CarrerasUpdateComponent, title: 'Actualizar carrera', canActivate: [AuthGuard, AdminGuard], data: { roles: [1] } },
   { path: 'materias/update/:id', component: MateriasUpdateComponent, title: 'Actualizar materia', canActivate: [AuthGuard, AdminGuard], data: { roles: [1] } },
   { path: 'profesores/update/:id', component: ProfesoresUpdateComponent, title: 'Actualizar profesor', canActivate: [AuthGuard, AdminGuard], data: { roles: [1] } },
+  { path: 'profesor/add/materia/:id', component:ProfesorAddMateriaComponent, title:'Profesor add materia', canActivate : [AuthGuard,AdminGuard],data:{roles:[1]} },
+  { path: 'materia/add/profesor/:id' , component: MateriaAddProfesorComponent, title: 'Materia add profesor', canActivate: [AdminGuard,AuthGuard],data:{roles:[1]}},
   { path: '**', component: NotFoundComponent, title: 'Página no encontrada' },
 ];
 

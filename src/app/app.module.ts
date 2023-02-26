@@ -35,6 +35,8 @@ import { DeleteProfesorModalComponent } from './Components/delete-profesor-modal
 import { DeleteMateriaModalComponent } from './Components/delete-materia-modal/delete-materia-modal.component';
 import { FilterAlumnosComponent } from './Components/filter-alumnos/filter-alumnos.component';
 import { AddAlumnoModalComponent } from './Components/add-alumno-modal/add-alumno-modal.component';
+import { ProfesorAddMateriaComponent } from './Components/profesor-add-materia/profesor-add-materia.component';
+import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/materia-add-profesor.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { AddAlumnoModalComponent } from './Components/add-alumno-modal/add-alumn
     DeleteProfesorModalComponent,
     DeleteMateriaModalComponent,
     FilterAlumnosComponent,
-    AddAlumnoModalComponent
+    AddAlumnoModalComponent,
+    ProfesorAddMateriaComponent,
+    MateriaAddProfesorComponent
   ],
   imports: [
     BrowserModule,
