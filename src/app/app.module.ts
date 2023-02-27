@@ -37,6 +37,8 @@ import { FilterAlumnosComponent } from './Components/filter-alumnos/filter-alumn
 import { AddAlumnoModalComponent } from './Components/add-alumno-modal/add-alumno-modal.component';
 import { ProfesorAddMateriaComponent } from './Components/profesor-add-materia/profesor-add-materia.component';
 import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/materia-add-profesor.component';
+import { SpinnerComponent } from './Components/spinner/spinner.component';
+import { SpinnerInterceptor } from './Interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/m
     FilterAlumnosComponent,
     AddAlumnoModalComponent,
     ProfesorAddMateriaComponent,
-    MateriaAddProfesorComponent
+    MateriaAddProfesorComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,7 @@ import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/m
     MatDialogModule,
     MatSelectModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true},{provide:HTTP_INTERCEPTORS,useClass:SpinnerInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -17,14 +17,14 @@
             <span class="error-message" *ngIf="profesorForm.get('ap_materno')?.errors?.['required']">El campo apellido materno es obligatorio.</span>
         </div>
         <div class="my-4">
-        <label for="materias">Materias</label>
-        <ul *ngFor="let materia of profesor?.materias">
-          <input type="checkbox" name="materias" [(ngModel)]="materiasde" [ngModelOptions]="{standalone : true}">{{materia.nombre}}
-        </ul>
         </div>
-
         <button type="submit" class="primary-button" [disabled]="!profesorForm.valid">Actualizar</button>
     </form>
+
+    <label for="materias">Materias</label>
+        <ul *ngFor="let materia of profesor?.materias">
+        <input type="checkbox" [id]="materia.id" [value]="materia.id" [(ngModel)]="isChecked[materia.id]" >{{materia.nombre}}
+        </ul>
 </div>
 
 
