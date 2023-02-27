@@ -12,6 +12,7 @@ export class MateriaService {
   private getMateriasUrl = environment.apiUrl + '/materias';
   private materiaUrl = environment.apiUrl + '/materia';
   private deleteMateriaUrl = environment.apiUrl + '/delete/materia';
+  private addProfesorUrl = environment.apiUrl + '/materia/add/profesor/';
 
 
   constructor(private http: HttpClient) { }
@@ -51,6 +52,12 @@ export class MateriaService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  addProfesor(id:number, profesorId:number){
+    return this.http.post((this.addProfesorUrl + id), profesorId).pipe(
+      catchError(this.handleError)
+    )
   }
 
   private handleError(error: HttpErrorResponse) {

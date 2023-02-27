@@ -37,7 +37,7 @@ export class ProfesorAddMateriaComponent implements OnInit {
  }
 
  onSubmit(value:number) :void{
-  console.log(value)
-  //this.profesorService.addMateria( Number(this.activeRoute.snapshot.paramMap.get('id')) , value).subscribe()
+  //console.log(value)
+  this.profesorService.addMateria( Number(this.activeRoute.snapshot.paramMap.get('id')) , value).subscribe()
  }
 }

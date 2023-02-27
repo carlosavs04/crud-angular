@@ -38,7 +38,8 @@ export class MateriaAddProfesorComponent implements OnInit {
   }
 
   onSubmit(value:number) :void{
-    console.log(value)
+    //console.log(value)
+    this.materiaService.addProfesor(Number(this.activeRoute.snapshot.paramMap.get('id')),value).subscribe()
   }
 
 }
