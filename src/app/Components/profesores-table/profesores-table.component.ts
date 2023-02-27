@@ -6,7 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteProfesorModalComponent } from '../delete-profesor-modal/delete-profesor-modal.component';
 import { UserService } from 'src/app/Services/user.service';
 import { map } from 'rxjs/operators';
-
+import { ProfesorAddMateriaComponent } from '../profesor-add-materia/profesor-add-materia.component';
+import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { MateriaService } from 'src/app/Services/materia.service';
+import { Materia } from 'src/app/Interfaces/materia.interface';
 
 @Component({
   selector: 'app-profesores-table',
@@ -15,7 +18,18 @@ import { map } from 'rxjs/operators';
 })
 export class ProfesoresTableComponent implements OnInit {
   profesores?: Profesor[];
-  constructor(private profesorService: ProfesorService, private router: Router, public dialog: MatDialog, private userService: UserService) { }
+  filterForm: FormGroup;
+  materias?: Materia[];
+
+  constructor(private profesorService: ProfesorService, private router: Router, public dialog: MatDialog, private userService: UserService, private fb: FormBuilder, private materiaService: MateriaService) { 
+    this.filterForm = this.fb.group({
+      materia: ['', Validators.required],
+    });
+
+    this.materiaService.getMaterias().subscribe(materias => {
+      this.materias = materias;
+    });
+  }
 
   iAdmin: boolean = false;
 
@@ -25,13 +39,14 @@ export class ProfesoresTableComponent implements OnInit {
   }
 
   getProfesores() {
+    if (localStorage.getItem('profesores') !== null) {
+      this.profesores = JSON.parse(localStorage.getItem('profesores') || '{}');
+      localStorage.removeItem('profesores');
+    }
+
     this.profesorService.getProfesores().subscribe(
       profesores => this.profesores = profesores
     );
-  }
-
-  addMateria(id:number){
-    this.router.navigate(['/profesor/add/materia',id])
   }
 
   updateProfesor(id: number) {
@@ -45,6 +60,14 @@ export class ProfesoresTableComponent implements OnInit {
   openDeleteModal(id: number) {
     const dialogRef = this.dialog.open(DeleteProfesorModalComponent, {
       height: '283px',
+      width: '500px',
+      data: { id: id }
+    });
+  }
+
+  openAddModal(id: number) {
+    const addDialog = this.dialog.open(ProfesorAddMateriaComponent, {
+      height: '280px',
       width: '500px',
       data: { id: id }
     });
@@ -64,5 +87,13 @@ export class ProfesoresTableComponent implements OnInit {
         }
       })
     ).subscribe(response => console.log(response));
+  }
+
+  onFilter(values: Profesor) {
+    if(this.filterForm.valid) {
+      this.profesorService.filterProfesores(Number(values.materia)).subscribe(
+        profesores => this.profesores = profesores
+      );
+    } 
   }
 }

@@ -14,6 +14,9 @@
                     <option value="" disabled selected>Selecciona un rol</option>
                     <option *ngFor="let rol of roles" [value]="rol.id">{{rol.name}}</option>
                 </select>
+                <div *ngIf="rolForm.get('rol')?.invalid && (rolForm.get('rol')?.touched || rolForm.get('rol')?.dirty)">
+                    <span class="error-message" *ngIf="rolForm.get('rol')?.errors?.['required']">El campo rol es obligatorio.</span>
+                </div>
             </form>
         </div>
         <div class="px-6 py-4 text-right">

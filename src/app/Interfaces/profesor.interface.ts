@@ -6,4 +6,5 @@ export interface Profesor {
     ap_paterno: string;
     ap_materno: string;
     materias?: Array<Materia>;
+    materia: number;
 }

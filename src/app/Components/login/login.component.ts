@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   user?: User;
-  credencialesCorrectas:Boolean = false
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.loginForm = this.fb.group({
@@ -31,9 +30,6 @@ export class LoginComponent {
           if(this.userService.getUserLoggedIn()){
             this.router.navigate(['/alumnos']);
           }
-        }
-        else if(response.status === 401){
-          this.credencialesCorrectas = true
         }
       });
     }

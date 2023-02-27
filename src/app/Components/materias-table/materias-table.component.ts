@@ -4,6 +4,7 @@ import { Materia } from 'src/app/Interfaces/materia.interface';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteMateriaModalComponent } from '../delete-materia-modal/delete-materia-modal.component';
+import { MateriaAddProfesorComponent } from '../materia-add-profesor/materia-add-profesor.component';
 import { UserService } from 'src/app/Services/user.service';
 import { map } from 'rxjs/operators';
 
@@ -37,8 +38,12 @@ export class MateriasTableComponent implements OnInit {
     this.materiaService.deleteMateria(id).subscribe();
   }
 
-  addProfesor(id:number){
-    this.router.navigate(['/materia/add/profesor', id]);
+  openAddModal(id: number) {
+    const addDialog = this.dialog.open(MateriaAddProfesorComponent, {
+      height: '306px',
+      width: '500px',
+      data: { id: id }
+    });
   }
 
   openDeleteModal(id: number) {

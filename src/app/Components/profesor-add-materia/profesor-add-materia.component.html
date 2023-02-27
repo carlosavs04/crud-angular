@@ -1,12 +1,26 @@
-<h1>Agregar Materia</h1>
-<div class="form-container">
-  <form [formGroup]="profesorMateriaForm">
-    <h3>Profesor: </h3>
-    <h4>{{profesor?.nombre}} {{profesor?.ap_paterno}} {{profesor?.ap_materno}}</h4>
-    <label for="materia">Materias:</label>
-    <select name="materia_id" id="materia_id" formControlName="materia_id">
-      <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}}</option>
-    </select>
-    <button class="primary-button" type="submit" (click)="onSubmit(profesorMateriaForm.value)">Agregar</button>
-  </form>
+<div class="mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto">
+  <div class="px-6 py-4 bg-gray-400">
+    <div class="text-lg">
+      <button class="close-modal-button" (click)="close()">
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
+      <h1>Añadir materia</h1>
+    </div>
+    <div class="mt-4">
+      <h3>Selecciona la materia que deseas asignar al profesor</h3>
+      <form [formGroup]="profesorMateriaForm" (ngSubmit)="onSubmit(profesorMateriaForm.value)">
+        <label for="materia">Materia</label>
+        <select name="materia_id" id="materia_id" formControlName="materia_id">
+          <option value="" disabled selected>Selecciona una materia</option>
+          <option *ngFor="let materia of materias" value="{{materia.id}}">{{materia.nombre}}</option>
+        </select>
+        <div *ngIf="profesorMateriaForm.get('materia_id')?.invalid && (profesorMateriaForm.get('materia_id')?.touched || profesorMateriaForm.get('materia_id')?.dirty)">
+          <span class="error-message" *ngIf="profesorMateriaForm.get('materia_id')?.errors?.['required']">El campo materia es obligatorio.</span>
+        </div>
+      </form>
+    </div>
+    <div class="px-6 py-4 text-right">
+      <button type="submit" class="confirm-modal-button" (click)="onSubmit(profesorMateriaForm.value)">Confirmar</button>
+      <button class="cancel-modal-button" (click)="close()" type="button">Cancelar</button>
+    </div>
 </div>

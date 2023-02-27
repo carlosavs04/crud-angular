@@ -1,10 +1,10 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, Injectable, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ProfesorService } from 'src/app/Services/profesor.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Profesor } from 'src/app/Interfaces/profesor.interface';
 import { MateriaService } from 'src/app/Services/materia.service';
 import { Materia } from 'src/app/Interfaces/materia.interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,32 +12,29 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './profesor-add-materia.component.html',
   styleUrls: ['./profesor-add-materia.component.css']
 })
-export class ProfesorAddMateriaComponent implements OnInit {
-  id? : number
+
+@Injectable()
+export class ProfesorAddMateriaComponent {
   profesor? : Profesor
   materias?: Materia[]
   profesorMateriaForm: FormGroup
 
- constructor(private profesorService: ProfesorService, private router: Router,
-  private activeRoute:ActivatedRoute, private materiaService: MateriaService,
-  private fb: FormBuilder) {
+ constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: {id: number}, private profesorService: ProfesorService,
+ private materiaService: MateriaService, private fb: FormBuilder) {
     this.profesorMateriaForm = this.fb.group({
-      materia_id: ['']
-    })
+      materia_id: ['', Validators.required]
+    });
+
+    this.materiaService.getMaterias().subscribe((materias)=>{
+      this.materias = materias
+    });
  }
 
- ngOnInit(): void {
-  this.id = Number(this.activeRoute.snapshot.paramMap.get('id'))
-   this.profesorService.getProfesor(this.id).subscribe((profesor)=>{
-    this.profesor = profesor
-   })
-   this.materiaService.getMaterias().subscribe((materias)=>{
-    this.materias = materias
-   })
- }
+  close() {
+    this.dialog.closeAll()
+  }
 
- onSubmit(value:number) :void{
-  //console.log(value)
-  this.profesorService.addMateria( Number(this.activeRoute.snapshot.paramMap.get('id')) , value).subscribe()
+ onSubmit(value:number): void {
+  this.profesorService.addMateria(this.data.id, value).subscribe(() => location.reload());
  }
 }

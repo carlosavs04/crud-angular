@@ -1,4 +1,17 @@
 <h1>Lista de profesores</h1>
+<div class="ml-10 -mb-20">
+    <form [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
+        <select formControlName="materia" class="w-1/4">
+            <option value="" disabled selected>Selecciona una materia</option>
+            <option *ngFor="let materia of materias" [value]="materia.id">{{materia.nombre}}</option>
+        </select>
+        <button type="submit" class="show-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+            </svg>&nbsp;Ver</button>
+    </form>
+    </div>
 <table>
     <thead>
         <tr>
@@ -20,11 +33,14 @@
             <td>{{profesor.ap_materno}}</td>
             <td>
               <ul *ngFor="let materia of profesor.materias">
-                <li>{{materia.nombre}}</li>
+                <li class="w-36">{{materia.nombre}}</li>
               </ul>
             </td>
             <td *ngIf="iAdmin">
-              <button type="button" class="bg-green-500 px-6 text-white rounded-lg py-1" (click)="addMateria(profesor.id)"> Agregar Materia </button>
+                <button type="button" class="tab-add-button w-44" (click)="openAddModal(profesor.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>&nbsp;Añadir materia</button>            
             </td>
             <td *ngIf="iAdmin">
                 <button type="button" class="edit-button" (click)="updateProfesor(profesor.id)">

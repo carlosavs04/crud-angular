@@ -59,6 +59,14 @@ export class ProfesorService {
     )
   }
 
+  filterProfesores(materia: number): Observable<Profesor[]> {
+    return this.http.get<Profesor[]>(this.getProfesoresUrl + '/' + materia)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if(error.status === 0) {
       console.error('Un error inesperado ha ocurrido:', error.error);
