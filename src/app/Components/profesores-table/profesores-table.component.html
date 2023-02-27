@@ -32,8 +32,8 @@
             <td>{{profesor.ap_paterno}}</td>
             <td>{{profesor.ap_materno}}</td>
             <td>
-              <ul *ngFor="let materia of profesor.materias">
-                <li class="w-36">{{materia.nombre}}</li>
+              <ul *ngFor="let m of profesor.materias">
+                <li class="w-36">{{m.nombre}}</li>
               </ul>
             </td>
             <td *ngIf="iAdmin">

@@ -44,9 +44,11 @@ export class ProfesoresTableComponent implements OnInit {
       localStorage.removeItem('profesores');
     }
 
-    this.profesorService.getProfesores().subscribe(
-      profesores => this.profesores = profesores
-    );
+    else {
+      this.profesorService.getProfesores().subscribe(
+        profesores => this.profesores = profesores
+      );
+    }
   }
 
   updateProfesor(id: number) {
@@ -91,9 +93,9 @@ export class ProfesoresTableComponent implements OnInit {
 
   onFilter(values: Profesor) {
     if(this.filterForm.valid) {
-      this.profesorService.filterProfesores(Number(values.materia)).subscribe(
-        profesores => this.profesores = profesores
-      );
-    } 
-  }
+      this.profesorService.filterProfesores(Number(values.materia)).subscribe(response => {
+        localStorage.setItem('profesores', JSON.stringify(response)), location.reload();});
+    }
+  } 
 }
+
