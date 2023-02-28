@@ -28,7 +28,7 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         if(response.status === 200){
           if(this.userService.getUserLoggedIn()){
-            this.router.navigate(['/alumnos']);
+            location.assign('/alumnos');
           }
         }
       });

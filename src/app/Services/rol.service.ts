@@ -10,12 +10,20 @@ import { Rol } from '../Interfaces/rol.interface';
 })
 export class RolService {
   private getRolesUrl = environment.apiUrl + '/roles';
+  private getRolesMiddlewareUrl = environment.apiUrl + '/roles/request';
   constructor(private http: HttpClient) { }
 
   getRoles(): Observable<Rol[]> {
     return this.http.get<Rol[]>(this.getRolesUrl)
       .pipe(
         retry(3),
+        catchError(this.handleError)
+      );
+  }
+
+  getRolesMiddleware(url: string, method: string) {
+    return this.http.post<Rol[]>(this.getRolesMiddlewareUrl, { url, method })
+      .pipe(
         catchError(this.handleError)
       );
   }

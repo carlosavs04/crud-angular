@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  iAdmin: boolean = true;
+  iAdmin: boolean = false;
   userLoggedIn: boolean = false;
   @ViewChild('verDropdown') verDropdown?: Dropdown;
   @ViewChild('añadirDropdown') añadirDropdown?: Dropdown;
@@ -113,6 +113,7 @@ export class NavbarComponent implements OnInit {
       onToggle: () => {
           console.log('dropdown has been toggled');
       }
+      
     };
     const verDropdown: DropdownInterface = new Dropdown(dropdownMenu, dropdownButton, options);
     verDropdown.hide();
