@@ -1,13 +1,13 @@
 <div>
-  <h1>Eliminar Profesores de la Materia</h1>
   <div class="form-container">
+    <h1>Eliminar profesores</h1>
     <form>
-    <h2>Materia: {{materia?.nombre}} </h2>
+    <h3>Materia: {{materia?.nombre}} </h3>
       <div class="my-4">
         <label for="profesores">Profesores</label>
-      <ul *ngFor="let profesor of materia?.profesores">
-        <input type="checkbox" [id]="profesor.id" [value]="profesor.id" [(ngModel)]="isChecked[profesor.id]"  [ngModelOptions]="{standalone:true}" (change)="updateSelectedIds()" >{{profesor.nombre}}
-      </ul>
+          <ul *ngFor="let profesor of materia?.profesores">
+            <input type="checkbox" [id]="profesor.id" [value]="profesor.id" [(ngModel)]="isChecked[profesor.id]"  [ngModelOptions]="{standalone:true}" (change)="updateSelectedIds()" class="checkbox" >{{profesor.nombre}} {{profesor.ap_paterno}}
+          </ul>         
       </div>
       <button class="primary-button" (click)="onSubmit()">Enviar</button>
     </form>

@@ -107,3 +107,11 @@ h3 {
     @apply block w-full px-4 py-2 text-center text-sm leading-5 text-white hover:bg-blue-900 focus:outline-none focus:bg-gray-900 transition duration-150 ease-in-out
 }
 
+.checkbox {
+    @apply w-2 h-2 text-blue-600 rounded focus:ring-gray-900 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600 inline-block mr-2 mb-3 !important
+}
+
+.verify-input {
+    @apply w-1/2 h-10 border-b border-black px-4 ml-24 text-lg mb-4 bg-white text-black !important
+}
+
