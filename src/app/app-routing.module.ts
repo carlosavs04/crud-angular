@@ -24,6 +24,8 @@ import { LoginGuard } from './Guards/login.guard';
 import { ProfesorAddMateriaComponent } from './Components/profesor-add-materia/profesor-add-materia.component';
 import { Title } from '@angular/platform-browser';
 import { MateriaAddProfesorComponent } from './Components/materia-add-profesor/materia-add-profesor.component';
+import { ProfesorDeleteMateriaComponent } from './Components/profesor-delete-materia/profesor-delete-materia.component';
+import { MateriaDeleteProfesorComponent } from './Components/materia-delete-profesor/materia-delete-profesor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -46,6 +48,8 @@ const routes: Routes = [
   { path: 'profesores/update/:id', component: ProfesoresUpdateComponent, title: 'Actualizar profesor', canActivate: [AuthGuard, AdminGuard], data: { roles: [1] } },
   { path: 'profesor/add/materia/:id', component:ProfesorAddMateriaComponent, title:'Profesor add materia', canActivate : [AuthGuard, AdminGuard], data:{roles:[1]} },
   { path: 'materia/add/profesor/:id' , component: MateriaAddProfesorComponent, title: 'Materia add profesor', canActivate: [AdminGuard, AuthGuard], data:{roles:[1]}},
+  { path: 'delete/profesor/materia/:id', component:ProfesorDeleteMateriaComponent, title: 'Eliminar materias de profesor', canActivate: [AuthGuard, AdminGuard], data:{roles:[1]}},
+  { path: 'delete/materia/profesor/:id', component: MateriaDeleteProfesorComponent, title: 'Eliminar profesores de materia', canActivate: [AuthGuard, AdminGuard], data:{roles:[1]}},
   { path: '**', component: NotFoundComponent, title: 'Página no encontrada' },
 ];
 

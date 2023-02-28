@@ -21,7 +21,7 @@ export class ProfesoresTableComponent implements OnInit {
   filterForm: FormGroup;
   materias?: Materia[];
 
-  constructor(private profesorService: ProfesorService, private router: Router, public dialog: MatDialog, private userService: UserService, private fb: FormBuilder, private materiaService: MateriaService) { 
+  constructor(private profesorService: ProfesorService, private router: Router, public dialog: MatDialog, private userService: UserService, private fb: FormBuilder, private materiaService: MateriaService) {
     this.filterForm = this.fb.group({
       materia: ['', Validators.required],
     });
@@ -53,6 +53,10 @@ export class ProfesoresTableComponent implements OnInit {
 
   updateProfesor(id: number) {
     this.router.navigate(['/profesores/update', id]);
+  }
+
+  deleteRelacion(id:number){
+    this.router.navigate(['/delete/profesor/materia',id])
   }
 
   deleteProfesor(id: number) {
@@ -96,6 +100,6 @@ export class ProfesoresTableComponent implements OnInit {
       this.profesorService.filterProfesores(Number(values.materia)).subscribe(response => {
         localStorage.setItem('profesores', JSON.stringify(response)), location.reload();});
     }
-  } 
+  }
 }
 

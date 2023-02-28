@@ -1,0 +1,16 @@
+<div>
+  <h1>Eliminar Profesores de la Materia</h1>
+  <div class="form-container">
+    <form>
+    <h2>Materia: {{materia?.nombre}} </h2>
+      <div class="my-4">
+        <label for="profesores">Profesores</label>
+      <ul *ngFor="let profesor of materia?.profesores">
+        <input type="checkbox" [id]="profesor.id" [value]="profesor.id" [(ngModel)]="isChecked[profesor.id]"  [ngModelOptions]="{standalone:true}" (change)="updateSelectedIds()" >{{profesor.nombre}}
+      </ul>
+      </div>
+      <button class="primary-button" (click)="onSubmit()">Enviar</button>
+    </form>
+  </div>
+</div>
+

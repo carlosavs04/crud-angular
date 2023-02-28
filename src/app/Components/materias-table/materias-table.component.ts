@@ -38,6 +38,10 @@ export class MateriasTableComponent implements OnInit {
     this.materiaService.deleteMateria(id).subscribe();
   }
 
+  deleteRelacion(id: number) {
+    this.router.navigate(['/delete/materia/profesor/',id])
+  }
+
   openAddModal(id: number) {
     const addDialog = this.dialog.open(MateriaAddProfesorComponent, {
       height: '306px',

@@ -17,26 +17,19 @@ interface CheckboxState {
 
 @Injectable()
 export class ProfesoresUpdateComponent implements OnInit {
+
   profesorForm: FormGroup;
   profesor?: Profesor;
   id?: number;
-  selectedIds: number[] = [];
 
-
-  isChecked: CheckboxState = {};
 
   constructor(private fb: FormBuilder, private profesorService: ProfesorService, private router: Router, private route: ActivatedRoute) {
-
-    this.profesor?.materias?.forEach((materia) => {
-      this.isChecked[materia.id] = false;
-    })
 
 
     this.profesorForm = this.fb.group({
       nombre: ['', Validators.required],
       ap_paterno: ['', Validators.required],
       ap_materno: ['', Validators.required],
-      materias: [[]]
     });
   }
 
@@ -48,9 +41,6 @@ export class ProfesoresUpdateComponent implements OnInit {
     })
   }
 
-  verifyContent(values:any){
-    console.log(this.selectedIds)
-  }
 
   onSubmit(values: Profesor) {
     if(this.profesorForm.valid) {
@@ -59,13 +49,6 @@ export class ProfesoresUpdateComponent implements OnInit {
     }
   }
 
-  updateSelectedIds() {
-    this.selectedIds = [];
-    Object.keys(this.isChecked).forEach(key => {
-      if (this.isChecked[+key]) {
-        this.selectedIds.push(+key);
-      }
-    })
-  };
+
 
 }
