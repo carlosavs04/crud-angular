@@ -23,10 +23,10 @@ export class CodeVerifyComponent {
       this.userService.verifyCode(values).subscribe((response:any)=>{
         if (response.status == 200) {
           this.router.navigate(['/login']);
+          localStorage.removeItem('signedRoute');
         }
       });
     }
-
   }
 
 

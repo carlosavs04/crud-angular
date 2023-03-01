@@ -23,7 +23,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  private signedRoute: string = '';
+  private signedRoute?: string;
 
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.registerUrl, user)
@@ -34,10 +34,12 @@ export class UserService {
 
   setSignedRoute(route: string) {
     this.signedRoute = route;
+    localStorage.setItem('signedRoute', route);
   }
 
-  getSignedRoute() :string {
-    return this.signedRoute;
+  getSignedRoute() : any {
+    this.signedRoute = localStorage.getItem('signedRoute')?.toString();
+    return this.signedRoute; 
   }
 
   verifyCode(code: string) {
