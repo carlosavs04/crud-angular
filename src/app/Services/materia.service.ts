@@ -71,7 +71,7 @@ export class MateriaService {
     if(error.status === 0) {
       console.error('Un error inesperado ha ocurrido:', error.error);
     } else {
-      alert('Error: ' + error.error.mensaje +'.');
+      alert('Error: ' + error.error.error);
       console.error(
         `Error en el servidor: ${error.status}, \nRespuesta:`, error.error
       )
