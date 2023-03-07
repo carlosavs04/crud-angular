@@ -31,7 +31,7 @@ export class RegisterComponent {
   onSubmit(values: User) {
     if(this.registerForm.valid && values.password === values.password_confirmation) {
       this.userService.registerUser(values).subscribe((response:any)=>{
-        if (response.status == 200) {
+        if (response.status == 201) {
           this.userService.setSignedRoute(response.url);
           this.router.navigate(['/emailverify']);
         }
