@@ -41,6 +41,8 @@ import { SpinnerComponent } from './Components/spinner/spinner.component';
 import { SpinnerInterceptor } from './Interceptors/spinner.interceptor';
 import { ProfesorDeleteMateriaComponent } from './Components/profesor-delete-materia/profesor-delete-materia.component';
 import { MateriaDeleteProfesorComponent } from './Components/materia-delete-profesor/materia-delete-profesor.component';
+import { AnimalFormComponent } from './Components/animal-form/animal-form.component';
+import { AnimalesTableComponent } from './Components/animales-table/animales-table.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { MateriaDeleteProfesorComponent } from './Components/materia-delete-prof
     MateriaAddProfesorComponent,
     SpinnerComponent,
     ProfesorDeleteMateriaComponent,
-    MateriaDeleteProfesorComponent
+    MateriaDeleteProfesorComponent,
+    AnimalFormComponent,
+    AnimalesTableComponent
   ],
   imports: [
     BrowserModule,

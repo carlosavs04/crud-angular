@@ -1,0 +1,15 @@
+<h1>Lista de animales</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let animal of animales">
+            <td>{{animal.nombre}}</td>
+            <td>{{animal.tipo}}</td>
+        </tr>
+    </tbody>
+</table>
